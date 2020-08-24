@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import LinkButton from '../../atoms/link-button/LinkButton';
 
 import logoImg from '../../../assets/images/logo.svg';
 import backIcon from '../../../assets/images/icons/back.svg';
@@ -15,12 +15,11 @@ const PageHeader: React.FC<IPageHeaderProps> = (props) => {
   return (
     <header className="page-header">
       <div className="top-bar-container">
-        <Link to="/">
-          <img
-            src={backIcon}
-            alt="Voltar"
-          />
-        </Link>
+        <LinkButton
+          to='/'
+          linkType='default'
+          imagePath={backIcon}
+        />
 
         <img
           src={logoImg}

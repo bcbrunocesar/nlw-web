@@ -19,7 +19,7 @@ export default {
     title: 'Horários disponíveis',
     buttonText: '+ Novo horário',
     inputs: {
-      weekDayText: 'Dai da semana',
+      weekDayText: 'Dia da semana',
       fromText: 'Das',
       toText: 'Até'
     }

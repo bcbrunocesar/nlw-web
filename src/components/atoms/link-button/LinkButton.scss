@@ -1,0 +1,45 @@
+.link-button {
+  img {
+    width: 4rem;
+    margin-right: 2.4rem;
+  }
+
+  &--study,
+  &--classes {
+    width: 30rem;
+    height: 10.4rem;
+    border-radius: 0.8rem;
+    font: 700 2.0rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--color-button-text);
+    transition: background-color 0.2s;
+  }
+
+  &--default {
+    height: 3.2rem;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+
+  &--study {
+    background: var(--color-primary-lighter);
+
+    &:hover {
+      background: var(--color-primary-light);
+    }
+  }
+
+  &--classes {
+    background: var(--color-secondary);
+
+    &:hover {
+      background: var(--color-secondary-dark);
+    }
+  }
+}

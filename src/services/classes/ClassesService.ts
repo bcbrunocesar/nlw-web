@@ -1,6 +1,7 @@
+import api from "../api";
 import { ListClassesResponse } from "../../models/responses/ListClassesResponse";
 import { ListClassesRequest } from "../../models/requests/ListClassesRequest";
-import api from "../api";
+import { NewTeacherFormRequest } from "../../models/requests/NewTeacherFormRequest";
 
 export default class ClassesService {
   public get({ subject, weekDay, time }
@@ -19,6 +20,16 @@ export default class ClassesService {
       .catch(error => {
         reject(error)
       });
+    });
+  }
+
+  public post(request: NewTeacherFormRequest): void {
+    api.post('classes', request)
+    .then(() => {
+      alert('Cadastro realizado com sucesso!');
+    })
+    .catch((error) => {
+      alert(`ERRO: ${error}`)
     });
   }
 }

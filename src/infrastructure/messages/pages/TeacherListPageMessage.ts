@@ -2,7 +2,7 @@ export default {
   form: {
     inputs: {
       subjectText: 'Matéria',
-      weekDayText: 'dia da semana',
+      weekDayText: 'Dia da semana',
       timeText: 'Hora',
     }
   },

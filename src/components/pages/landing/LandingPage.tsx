@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
 import { GetTotalConnectionResponse } from '../../../models/responses/GetTotalConnectionResponse';
 import ConnectionService from '../../../services/connections/ConnectionService';
 import LandingPageMessage from '../../../infrastructure/messages/pages/LandingPageMessage';
+import LinkButton from '../../atoms/link-button/LinkButton';
 
 import logoImg from '../../../assets/images/logo.svg';
 import landingImg from '../../../assets/images/landing.svg';
@@ -15,10 +15,19 @@ import './LandingPage.css';
 function LandingPage(): JSX.Element {
   const connectionService = new ConnectionService();
   const [totalConnections, setTotalConnections] = useState<GetTotalConnectionResponse>();
+  const isMounted = useRef(false);
 
   useEffect(() => {
-    connectionService.getTotalConnections().then(setTotalConnections);
-  }, [connectionService, totalConnections]);
+    connectionService.getTotalConnections()
+      .then(response => {
+        setTotalConnections(response);
+      })
+      .catch(error => console.log(error));
+
+    return () => {
+      isMounted.current = true;
+    }
+  }, [connectionService]);
 
 	return (
 		<div id="page-landing">
@@ -41,26 +50,19 @@ function LandingPage(): JSX.Element {
 				/>
 
 				<div className="buttons-container">
-					<Link
-						to="/study"
-						className="study"
-					>
-						<img
-							src={studyIcon}
-							alt={LandingPageMessage.buttons.studyText}
-						/>
-						{LandingPageMessage.buttons.studyText}
-					</Link>
-					<Link
-						to="/give-classes"
-						className="give-classes"
-					>
-						<img
-							src={giveClassesIcon}
-							alt={LandingPageMessage.buttons.giveClasses}
-						/>
-						{LandingPageMessage.buttons.giveClasses}
-					</Link>
+          <LinkButton
+            to='/study'
+            textLink={LandingPageMessage.buttons.studyText}
+            linkType='study'
+            imagePath={studyIcon}
+          />
+
+          <LinkButton
+            to='/give-classes'
+            textLink={LandingPageMessage.buttons.giveClasses}
+            linkType='classes'
+            imagePath={giveClassesIcon}
+          />
 				</div>
 
 				<span className="total-connections">
