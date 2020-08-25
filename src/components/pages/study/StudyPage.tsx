@@ -5,16 +5,16 @@ import TeacherSearch from '../../organisms/teacher-search/TeacherSearch';
 
 import ClassesService from '../../../services/classes/ClassesService';
 import PageMessages from '../../../infrastructure/messages/pages/TeacherListPageMessage';
-import { ListClassesResponse } from '../../../models/responses/ListClassesResponse';
-import { TeacherSearchFormRequest } from '../../../models/requests/TeacherSearchFormRequest';
+import { IListClassesResponse } from '../../../models/responses/classes/IListClassesResponse';
+import { ISearchTeacherFormRequest } from '../../../models/requests/teachers/ISearchTeacherFormRequest';
 
 import './StudyPage.css';
 
 function StudyPage(): JSX.Element {
   const classesService = new ClassesService();
-  const [teachers, setTeacher] = useState<ListClassesResponse[]>();
+  const [teachers, setTeacher] = useState<IListClassesResponse[]>();
 
-  function handleSearchTeachers({subject, weekDay, time}: TeacherSearchFormRequest): void {
+  function handleSearchTeachers({subject, weekDay, time}: ISearchTeacherFormRequest): void {
     classesService.get({
       subject,
       weekDay: Number(weekDay),

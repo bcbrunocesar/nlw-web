@@ -1,12 +1,12 @@
 import React, { InputHTMLAttributes } from 'react';
 import './Input.css';
 
-interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface ITextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   name: string;
 }
 
-const Input: React.FC<TextInputProps> = ({ label, name, ...rest }) => {
+const Input: React.FC<ITextInputProps> = ({ label, name, ...rest }) => {
   return (
     <div className="input-block">
       <label htmlFor={name}>{label}</label>

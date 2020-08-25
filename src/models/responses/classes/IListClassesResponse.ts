@@ -1,4 +1,4 @@
-export interface ListClassesResponse {
+export interface IListClassesResponse {
   id: number;
   subject: string;
   cost: number;

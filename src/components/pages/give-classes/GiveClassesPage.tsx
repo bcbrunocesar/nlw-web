@@ -1,16 +1,16 @@
 import React from 'react';
 import PageHeader from '../../organisms/page-header/PageHeader';
-import NewTeacherForm from '../../organisms/new-teacher-form/NewTeacherForm';
+import AddTeacherForm from '../../organisms/add-teacher-form/AddTeacherForm';
 import ClassesService from '../../../services/classes/ClassesService';
 import PageMessages from '../../../infrastructure/messages/pages/TeacherFormPageMessage';
-import { NewTeacherFormRequest } from '../../../models/requests/NewTeacherFormRequest';
+import { IAddTeacherFormRequest } from '../../../models/requests/teachers/IAddTeacherFormRequest';
 
 import './GiveClassesPage.css';
 
 function GiveClassesPage(): JSX.Element {
   const classesService = new ClassesService();
 
-  function handleTeacherForm(request: NewTeacherFormRequest) {
+  function handleAddTeacherForm(request: IAddTeacherFormRequest) {
     classesService.post(request);
   }
 
@@ -25,8 +25,8 @@ function GiveClassesPage(): JSX.Element {
       />
 
       <main>
-        <NewTeacherForm
-          submitAction={handleTeacherForm}
+        <AddTeacherForm
+          submitAction={handleAddTeacherForm}
         />
       </main>
     </div>

@@ -1,4 +1,4 @@
-export interface ListClassesRequest {
+export interface IListClassesRequest {
   subject: string;
   weekDay: number;
   time: string;

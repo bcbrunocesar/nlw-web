@@ -1,12 +1,12 @@
 import api from "../api";
-import { ListClassesResponse } from "../../models/responses/ListClassesResponse";
-import { ListClassesRequest } from "../../models/requests/ListClassesRequest";
-import { NewTeacherFormRequest } from "../../models/requests/NewTeacherFormRequest";
+import { IListClassesResponse } from "../../models/responses/classes/IListClassesResponse";
+import { IListClassesRequest } from "../../models/requests/classes/IListClassesRequest";
+import { IAddTeacherFormRequest } from "../../models/requests/teachers/IAddTeacherFormRequest";
 
 export default class ClassesService {
   public get({ subject, weekDay, time }
-    : ListClassesRequest): Promise<ListClassesResponse[]> {
-    return new Promise<ListClassesResponse[]>((resolve, reject) => {
+    : IListClassesRequest): Promise<IListClassesResponse[]> {
+    return new Promise<IListClassesResponse[]>((resolve, reject) => {
       api.get('/classes', {
         params: {
           subject,
@@ -23,7 +23,7 @@ export default class ClassesService {
     });
   }
 
-  public post(request: NewTeacherFormRequest): void {
+  public post(request: IAddTeacherFormRequest): void {
     api.post('classes', request)
     .then(() => {
       alert('Cadastro realizado com sucesso!');

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Input from '../../atoms/input/Input';
 import Button from '../../atoms/button/Button';
 import Select from '../../atoms/select/Select';
-import { TeacherSearchFormRequest } from '../../../models/requests/TeacherSearchFormRequest';
+import { ISearchTeacherFormRequest } from '../../../models/requests/teachers/ISearchTeacherFormRequest';
 import { SubjectSelectViewModel } from '../../../models/views/SubjectViewModel';
 import { DayOfWeekSelectViewModel } from '../../../models/views/DayOfWeekViewModel';
 
@@ -10,16 +10,16 @@ import PageMessages from '../../../infrastructure/messages/pages/TeacherListPage
 
 import './TeacherSearch.scss';
 
-interface ITeacherSearchFormProps {
-  submitAction(props: TeacherSearchFormRequest): void;
+interface ISearchTeacherFormProps {
+  submitAction(props: ISearchTeacherFormRequest): void;
 }
 
-const TeacherSearch: React.FC<ITeacherSearchFormProps> = ({ submitAction }) => {
+const TeacherSearch: React.FC<ISearchTeacherFormProps> = ({ submitAction }) => {
   const [subject, setSubject] = useState('');
   const [weekDay, setWeekDay] = useState('');
   const [time, setTime] = useState('');
 
-  function handleTeacherSearchForm(): void {
+  function handleSearchTeacherForm(): void {
     submitAction({subject, weekDay, time});
   }
 
@@ -50,7 +50,7 @@ const TeacherSearch: React.FC<ITeacherSearchFormProps> = ({ submitAction }) => {
         textButton='Buscar'
         buttonType='button'
         buttonStyle='secondary'
-        handleClick={() => handleTeacherSearchForm()}
+        handleClick={() => handleSearchTeacherForm()}
       />
     </form>
   );

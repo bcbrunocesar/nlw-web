@@ -1,22 +1,22 @@
 import api from '../api';
-import { GetTotalConnectionResponse } from '../../models/responses/GetTotalConnectionResponse';
-import { SaveConnectionRequest } from '../../models/requests/SaveConnectionRequest';
+import { ISaveConnectionRequest } from '../../models/requests/connections/ISaveConnectionRequest';
 
 export default class ConnectionService {
 
-  public getTotalConnections(): Promise<GetTotalConnectionResponse> {
-    return new Promise<GetTotalConnectionResponse>((resolve, reject) => {
-      api.get('/connections')
-        .then(response => {
-          resolve(response.data);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+  public async getTotalConnections(): Promise<Number> {
+    const totalConnections = await api.get('/connections')
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        console.log(error);
+        return 0;
+      });
+
+    return Number(totalConnections);
   }
 
-  public save({ userId }: SaveConnectionRequest): Promise<void> {
+  public save({ userId }: ISaveConnectionRequest): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       api.post('/connections', { userId })
         .then(response => {

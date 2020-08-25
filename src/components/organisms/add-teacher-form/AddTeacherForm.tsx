@@ -6,19 +6,19 @@ import Select from '../../atoms/select/Select';
 import ScheduleItem from '../schedule-item/ScheduleItem';
 
 import { SubjectSelectViewModel } from '../../../models/views/SubjectViewModel';
-import { NewTeacherFormRequest } from '../../../models/requests/NewTeacherFormRequest';
-import { ScheduleItemRequest } from '../../../models/requests/ScheduleItemRequest';
+import { IAddTeacherFormRequest } from '../../../models/requests/teachers/IAddTeacherFormRequest';
+import { IScheduleItemRequest } from '../../../models/requests/classes/IScheduleItemRequest';
 import PageMessages from '../../../infrastructure/messages/pages/TeacherFormPageMessage';
 
 import warningIcon from '../../../assets/images/icons/warning.svg';
-import './NewTeacherForm.scss';
+import './AddTeacherForm.scss';
 
-interface NewTeacherForm {
-  submitAction(props: NewTeacherFormRequest): void;
+interface IAddTeacherForm {
+  submitAction(props: IAddTeacherFormRequest): void;
 }
 
-const NewTeacherForm: React.FC<NewTeacherForm> = ({ submitAction }) => {
-  const newScheduleItem: ScheduleItemRequest = {
+const AddTeacherForm: React.FC<IAddTeacherForm> = ({ submitAction }) => {
+  const newScheduleItem: IScheduleItemRequest = {
     weekDay: 0,
     from: '',
     to: ''
@@ -49,14 +49,23 @@ const NewTeacherForm: React.FC<NewTeacherForm> = ({ submitAction }) => {
     setScheduleItems(updatedScheduleItems);
   }
 
-  function handleAddNewScheduleItem(): void {
+  function handleAddScheduleItem(): void {
     setScheduleItems([
       ...scheduleItems,
       newScheduleItem
     ]);
   }
 
-  function handleNewTeacherFormSubmit(): void {
+  function handleDeleteScheduleItem(position: number): void {
+    const items = [...scheduleItems];
+
+    if (items.length > 1) {
+      items.splice(position, 1);
+      setScheduleItems(items);
+    }
+  }
+
+  function handleAddTeacherFormSubmit(): void {
     submitAction({
       name,
       avatar,
@@ -125,7 +134,7 @@ const NewTeacherForm: React.FC<NewTeacherForm> = ({ submitAction }) => {
             textButton={PageMessages.formAvailableTime.buttonText}
             buttonType='button'
             buttonStyle='link'
-            handleClick={handleAddNewScheduleItem}
+            handleClick={handleAddScheduleItem}
           />
         </legend>
 
@@ -135,6 +144,7 @@ const NewTeacherForm: React.FC<NewTeacherForm> = ({ submitAction }) => {
               index={index}
               scheduleItem={scheduleItem}
               handleUpdate={handleUpdateScheduleItems}
+              handleDelete={handleDeleteScheduleItem}
             />
           </div>
         })}
@@ -154,11 +164,11 @@ const NewTeacherForm: React.FC<NewTeacherForm> = ({ submitAction }) => {
           textButton={PageMessages.footer.buttonText}
           buttonType='button'
           buttonStyle='secondary'
-          handleClick={() => handleNewTeacherFormSubmit()}
+          handleClick={() => handleAddTeacherFormSubmit()}
         />
       </footer>
     </form>
   )
 }
 
-export default NewTeacherForm;
+export default AddTeacherForm;

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { GetTotalConnectionResponse } from '../../../models/responses/GetTotalConnectionResponse';
+import React, { useState, useEffect } from 'react';
 import ConnectionService from '../../../services/connections/ConnectionService';
 import LandingPageMessage from '../../../infrastructure/messages/pages/LandingPageMessage';
 import LinkButton from '../../atoms/link-button/LinkButton';
@@ -14,19 +13,15 @@ import './LandingPage.css';
 
 function LandingPage(): JSX.Element {
   const connectionService = new ConnectionService();
-  const [totalConnections, setTotalConnections] = useState<GetTotalConnectionResponse>();
-  const isMounted = useRef(false);
+  const [totalConnections, setTotalConnections] = useState<Number>();
 
   useEffect(() => {
-    connectionService.getTotalConnections()
-      .then(response => {
-        setTotalConnections(response);
-      })
-      .catch(error => console.log(error));
-
-    return () => {
-      isMounted.current = true;
+    async function fetchData() {
+      const totalConnections = await connectionService.getTotalConnections();
+      setTotalConnections(totalConnections);
     }
+
+    fetchData();
   }, [connectionService]);
 
 	return (
@@ -66,7 +61,7 @@ function LandingPage(): JSX.Element {
 				</div>
 
 				<span className="total-connections">
-          Total de {totalConnections?.total} conexões já realizadas <img src={purpleHeartIcon} alt="Coração roxo"/>
+          Total de {totalConnections} conexões já realizadas <img src={purpleHeartIcon} alt="Coração roxo"/>
 				</span>
 			</div>
 		</div>

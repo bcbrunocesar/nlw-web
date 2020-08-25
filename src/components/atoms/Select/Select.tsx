@@ -3,7 +3,7 @@ import SelectMessage from '../../../infrastructure/messages/components/atoms/Sel
 
 import './Select.css';
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+interface ISelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   name: string;
   options: Array<{
@@ -12,7 +12,7 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   }>;
 }
 
-const Select: React.FC<SelectProps> = ({ label, name, options, ...rest }) => {
+const Select: React.FC<ISelectProps> = ({ label, name, options, ...rest }) => {
   return (
     <div className="select-block">
       <label htmlFor={name}>{label}</label>

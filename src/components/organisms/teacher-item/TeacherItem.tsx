@@ -5,7 +5,7 @@ import ConnectionService from '../../../services/connections/ConnectionService';
 
 import './TeacherItem.css';
 
-interface TeacherItemProps {
+interface ITeacherItemProps {
   teacher: {
     id: number;
     subject: string;
@@ -18,7 +18,7 @@ interface TeacherItemProps {
   }
 }
 
-const TeacherItem: React.FC<TeacherItemProps> = ({ teacher }) => {
+const TeacherItem: React.FC<ITeacherItemProps> = ({ teacher }) => {
   const connectionService = new ConnectionService();
 
   function saveConection(): void {
